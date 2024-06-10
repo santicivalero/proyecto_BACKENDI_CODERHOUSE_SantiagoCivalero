@@ -63,7 +63,7 @@ class ProductManager {
       console.log("El id debe ser un número");
       throw new CustomError("El id debe ser un número", 400);
     }
-  
+
     const product = this.products.find(
       (product) => product.id === Number(idProduct)
     );
@@ -77,6 +77,11 @@ class ProductManager {
   }
 
   async deleteProduct(idProduct) {
+    if (isNaN(Number(idProduct))) {
+      console.log("El id debe ser un número");
+      throw new CustomError("El id debe ser un número", 400);
+    }
+
     const productIndex = this.products.findIndex(
       (product) => product.id === Number(idProduct)
     );
@@ -91,7 +96,7 @@ class ProductManager {
       this.writeToFile();
 
       console.log("Se eliminó el producto correctamente");
-      return true;
+      return idProduct;
     } catch (error) {
       console.log(error);
       throw new Error(error);
@@ -99,6 +104,19 @@ class ProductManager {
   }
 
   async updateProduct(idProduct, product) {
+    if (isNaN(Number(idProduct))) {
+      console.log("El id debe ser un número");
+      throw new CustomError("El id debe ser un número", 400);
+    }
+
+    const { code } = product;
+    if (code) {
+      if (this.products.some((p) => p.code === code)) {
+        console.log("El código ya existe");
+        throw new CustomError("El código ya existe", 400);
+      }
+    }
+
     const productIndex = this.products.findIndex(
       (product) => product.id === Number(idProduct)
     );

@@ -50,5 +50,18 @@
 			"image 100"
 		],
 		"id": 4
+	},
+	{
+		"id": 5,
+		"title": "Product 700",
+		"description": "descripción actualizadisima",
+		"code": "00701",
+		"price": 700,
+		"status": true,
+		"stock": 700,
+		"category": "Category 700",
+		"thumbnails": [
+			"image 700"
+		]
 	}
 ]

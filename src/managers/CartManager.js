@@ -22,7 +22,7 @@ class CartManager {
 
   async createCart() {
     const latestId = this.carts.length > 0 ? this.carts[this.carts.length - 1].id : 1;
-    const newCart = new Cart(latestId);
+    const newCart = new Cart(latestId + 1);
 
     this.carts.push(newCart);
 
@@ -36,6 +36,11 @@ class CartManager {
   }
 
   async addProductToCart(cid, pid, quantity) {
+    if (isNaN(Number(cid)) || isNaN(Number(pid))) {
+      console.log("El id debe ser un número");
+      throw new CustomError("El id debe ser un número", 400);
+    }
+
     if (quantity === null || quantity === undefined) {
       quantity = 1;
     }
@@ -55,10 +60,13 @@ class CartManager {
     const productIndex = this.carts[cartIndex].products.findIndex(
       (product) => product.id === Number(pid)
     );
+
+    console.log(cartIndex)
+    console.log(productIndex)
     
     if (productIndex === -1) {
       this.carts[cartIndex].products.push({
-        id: pid,
+        id: Number(pid),
         quantity,
       });
     } else {
@@ -75,6 +83,11 @@ class CartManager {
   }
 
   async getProductsFromCart(cartId) {
+    if (isNaN(Number(cartId))) {
+      console.log("El id debe ser un número");
+      throw new CustomError("El id debe ser un número", 400);
+    }
+
     const cartIndex = this.carts.findIndex((cart) => cart.id === Number(cartId));
 
     if (cartIndex === -1) {
