@@ -1,18 +1,10 @@
 import fs from "fs";
+import __dirname from "../dirname.js";
+import path from "path";
+import CustomError from "../classes/CustomError.js";
+import Product from "../classes/Product.js";
 
-// class Product {
-//   constructor(title, description, code, price, status, stock, category, thumbnails) {
-//     this.id = 0;
-//     this.title = title;
-//     this.description = description;
-//     this.code = code;
-//     this.price = price;
-//     this.status = status;
-//     this.stock = stock;
-//     this.category = category;
-//     this.thumbnails = thumbnails;
-//   }
-//}
+
 class ProductManager {
   constructor(path) {
     this.path = path;
@@ -29,43 +21,35 @@ class ProductManager {
   }
 
   async addProduct(product) {
-    if (
-      !product.title ||
-      !product.description ||
-      !product.code ||
-      !product.price ||
-      !product.status ||
-      !product.stock ||
-      !product.category ||
-      !product.thumbnails
-    ) {
+    const { title, description, code, price, stock, category, thumbnails } = product;
+
+    if (!title || !description || !code || !price || !stock || !category || !thumbnails) {
       console.log("Todos los campos son obligatorios");
-      return;
+      throw new CustomError("Todos los campos son obligatorios", 400);
     }
 
-    if (this.products.some((p) => p.code === product.code)) {
+    if (this.products.some((p) => p.code === code)) {
       console.log("El código ya existe");
-      return;
+      throw new CustomError("El código ya existe", 400);
     }
+
+    const newProduct = new Product(title, description, code, price, stock, category, thumbnails);
 
     if (this.products.length > 0) {
       const newId = this.products[this.products.length - 1].id + 1;
-      product.id = newId;
+      newProduct.id = newId;
     } else {
-      product.id = 1;
+      newProduct.id = 1;
     }
 
-    this.products.push(product);
+    this.products.push(newProduct);
 
     try {
-      await fs.promises.writeFile(
-        this.path,
-        JSON.stringify(this.products, null, "\t")
-      );
-
+      this.writeToFile();
       console.log("Se agregó el producto correctamente");
+      return product;
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   }
 
@@ -76,17 +60,17 @@ class ProductManager {
 
   getProductById(idProduct) {
     if (isNaN(Number(idProduct))) {
-      console.log("El id debe ser un número");
-      return;
+      console.log("El id debe ser un número");
+      throw new CustomError("El id debe ser un número", 400);
     }
-
+  
     const product = this.products.find(
       (product) => product.id === Number(idProduct)
     );
-
+  
     if (!product) {
       console.log("No se encontró el producto");
-      return "No se encontró el producto";
+      throw new CustomError("No se encontró el producto", 404);
     }
     console.log(product);
     return product;
@@ -94,61 +78,71 @@ class ProductManager {
 
   async deleteProduct(idProduct) {
     const productIndex = this.products.findIndex(
-      (product) => product.id == idProduct
+      (product) => product.id === Number(idProduct)
     );
 
     if (productIndex === -1) {
-      console.log("No se encontró el producto");
-      return;
+      throw new CustomError("No se encontró el producto", 404);
     }
 
     this.products.splice(productIndex, 1);
 
     try {
-      await fs.promises.writeFile(
-        this.path,
-        JSON.stringify(this.products, null, "\t")
-      );
+      this.writeToFile();
 
       console.log("Se eliminó el producto correctamente");
       return true;
     } catch (error) {
       console.log(error);
+      throw new Error(error);
     }
   }
 
   async updateProduct(idProduct, product) {
     const productIndex = this.products.findIndex(
-      (product) => product.id == idProduct
+      (product) => product.id === Number(idProduct)
     );
-
-    const productOld = this.products[productIndex];
 
     if (productIndex === -1) {
       console.log("No se encontró el producto");
-      return;
-    }
+      throw new CustomError("No se encontró el producto", 404);
+      }
+      
+    const productOld = this.products[productIndex];
 
-    this.products[productIndex] = {
+    const updatedProduct = this.products[productIndex] = {
       ...productOld,
       ...product,
     };
 
     try {
-        await fs.promises.writeFile(
+      this.writeToFile();
+
+      console.log("Se actualizó el producto correctamente");
+      return updatedProduct;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async writeToFile() {
+    try {
+      await fs.promises.writeFile(
         this.path,
         JSON.stringify(this.products, null, "\t")
       );
-
-      console.log("Se actualizó el producto correctamente");
-      return true;
+      console.log("Los productos se han escrito en el archivo correctamente.");
     } catch (error) {
-      console.log(error);
+      console.log("Error al escribir en el archivo:", error);
     }
   }
+
 }
 
-export default new ProductManager("./src/data/products.json");
+
+
+//export default new ProductManager("./src/data/products.json");
+export const productManager = new ProductManager(path.resolve(__dirname, "./data/products.json"));
 
 //test
 
