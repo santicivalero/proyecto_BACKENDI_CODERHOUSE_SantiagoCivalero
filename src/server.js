@@ -33,7 +33,7 @@ const httpServer = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// Socket.io configuration
+// Configuración del Socket.io
 const io = new Server(httpServer);
 
 io.on('connection', (socket) => {
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
   // Escuchar eventos de creación de productos
   socket.on('createProduct', async (product) => {
       try {
-          const newProduct = await productManager.addProduct(product);
+          await productManager.addProduct(product);
           io.emit('updateProducts', productManager.getProducts());
       } catch (error) {
           socket.emit('productError', error.message);

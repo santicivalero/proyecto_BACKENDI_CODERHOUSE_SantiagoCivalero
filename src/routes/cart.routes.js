@@ -4,6 +4,7 @@ import CustomError from "../classes/CustomError.js";
 
 const router = Router();
 
+// Crear carrito /api/carts
 router.post("/", async (req, res) => {
   try {
     const newCart = await cartManager.createCart();
@@ -14,6 +15,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Obtener todos los productos de un carrito /api/carts/:cid
 router.get("/:cid", async (req, res) => {
   const cid = req.params.cid;
   try {
@@ -29,6 +31,7 @@ router.get("/:cid", async (req, res) => {
   }
 });
 
+// Agregar producto a un carrito /api/carts/:cid/product/:pid
 router.post("/:cid/product/:pid", async (req, res) => {
   try {
     const cid = req.params.cid;

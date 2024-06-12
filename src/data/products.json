@@ -83,5 +83,16 @@
 		"stock": "12",
 		"category": "novedades",
 		"thumbnails": []
+	},
+	{
+		"id": 11,
+		"title": "productazo",
+		"description": "el mejor productoo",
+		"code": "99999",
+		"price": "233",
+		"status": true,
+		"stock": "11",
+		"category": "1111",
+		"thumbnails": []
 	}
 ]

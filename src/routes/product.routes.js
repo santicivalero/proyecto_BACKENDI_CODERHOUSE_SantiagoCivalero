@@ -4,6 +4,7 @@ import CustomError from "../classes/CustomError.js";
 
 const router = Router();
 
+// Obtener todos los productos /api/products
 router.get("/", (req, res) => {
   try {
     const products = productManager.getProducts();
@@ -14,6 +15,7 @@ router.get("/", (req, res) => {
   }
 });
 
+// Obtener un producto /api/products/:pid
 router.get("/:pid", (req, res) => {
   const pid = req.params.pid;
   try {
@@ -30,6 +32,7 @@ router.get("/:pid", (req, res) => {
   }
 });
 
+// Crear un producto /api/products
 router.post("/", async (req, res) => {
     try {
       const newProduct = await productManager.addProduct(req.body);
@@ -45,6 +48,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// Actualizar un producto /api/products/:pid
 router.put("/:pid", async (req, res) => {
   const pid = req.params.pid;
   try {
@@ -61,6 +65,7 @@ router.put("/:pid", async (req, res) => {
   }
 });
 
+// Eliminar un producto /api/products/:pid
 router.delete("/:pid", async (req, res) => {
   const pid = req.params.pid;
   try {

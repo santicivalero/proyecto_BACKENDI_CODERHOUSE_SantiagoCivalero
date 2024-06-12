@@ -20,6 +20,7 @@ class ProductManager {
     }
   }
 
+  // Crear producto
   async addProduct(product) {
     const { title, description, code, price, stock, category, thumbnails } = product;
 
@@ -53,11 +54,13 @@ class ProductManager {
     }
   }
 
+  // Obtener todos los productos
   getProducts() {
     console.log(this.products)
     return this.products;
   }
 
+  // Obtener un producto
   getProductById(idProduct) {
     if (isNaN(Number(idProduct))) {
       console.log("El id debe ser un número");
@@ -76,6 +79,7 @@ class ProductManager {
     return product;
   }
 
+  // Eliminar un producto
   async deleteProduct(idProduct) {
     if (isNaN(Number(idProduct))) {
       console.log("El id debe ser un número");
@@ -104,6 +108,7 @@ class ProductManager {
     }
   }
 
+  // Actualizar un producto
   async updateProduct(idProduct, product) {
     if (isNaN(Number(idProduct))) {
       console.log("El id debe ser un número");
@@ -144,6 +149,7 @@ class ProductManager {
     }
   }
 
+  // Escribir en el archivo
   async writeToFile(eliminar) {
     try {
       await fs.promises.writeFile(
@@ -162,78 +168,5 @@ class ProductManager {
 
 }
 
-
-
-//export default new ProductManager("./src/data/products.json");
 export const productManager = new ProductManager(path.resolve(__dirname, "./data/products.json"));
-
-//test
-
-// const productManager = new ProductManager("./src/data/products.json");
-
-// productManager.addProduct({
-//   title: "Product 1",
-//   description: "Description 1",
-//   code: "0001A",
-//   price: 100,
-//   status: true,
-//   stock: 10,
-//   category: "Category 1",
-//   thumbnails: ["image 1"],
-// });
-
-// productManager.addProduct({
-//   title: "Product 2",
-//   description: "Description 2",
-//   code: "0002B",
-//   price: 200,
-//   status: true,
-//   stock: 20,
-//   category: "Category 2",
-//   thumbnails: ["image 2"],
-// }); 
-
-// productManager.addProduct({
-//   title: "Product 3",
-//   description: "Description 3",
-//   code: "0003C",
-//   price: 300,
-//   status: true,
-//   stock: 30,
-//   category: "Category 3",
-//   thumbnails: ["image 3"],
-// });
-
-// productManager.addProduct({
-//   title: "Product 70",
-//   description: "Description 70",
-//   code: "0070D",
-//   price: 700,
-//   status: true,
-//   stock: 70,
-//   category: "Category 70",
-//   thumbnails: ["image 70"],
-// })
-
-// productManager.getProducts();
-
-// productManager.getProductById(1);
-// productManager.getProductById("ttt");
-// productManager.getProductById(350);
-
-// productManager.updateProduct(1, {
-//   title: "Product 1 Updated",
-// });
-
-// productManager.updateProduct(2, {
-//   description: "Description 2 Updated",
-// })
-
-// productManager.updateProduct(50, {
-//   title: "Product 50 Updated",
-// })
-
-
-
-// productManager.deleteProduct(4);
 

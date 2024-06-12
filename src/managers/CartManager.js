@@ -20,6 +20,7 @@ class CartManager {
     }
   }
 
+  // Crear carrito
   async createCart() {
     const latestId = this.carts.length > 0 ? this.carts[this.carts.length - 1].id : 1;
     const newCart = new Cart(latestId + 1);
@@ -35,6 +36,7 @@ class CartManager {
     }
   }
 
+  // Añadir producto a un carrito
   async addProductToCart(cid, pid, quantity) {
     if (isNaN(Number(cid)) || isNaN(Number(pid))) {
       console.log("El id debe ser un número");
@@ -82,6 +84,7 @@ class CartManager {
     }
   }
 
+  // Obtener todos los productos de un carrito
   async getProductsFromCart(cartId) {
     if (isNaN(Number(cartId))) {
       console.log("El id debe ser un número");
@@ -97,6 +100,7 @@ class CartManager {
     return this.carts[cartIndex].products;
   }
 
+  // Escribir en el archivo
   async writeToFile() {
     try {
       await fs.promises.writeFile(
@@ -110,7 +114,4 @@ class CartManager {
   }
 }
 
-
-
-//export default new CartManager("./src/data/carts.json");
 export const cartManager = new CartManager(path.resolve(__dirname, "./data/carts.json"));

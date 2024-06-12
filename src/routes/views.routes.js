@@ -5,12 +5,12 @@ const router = Router();
 
 let products = productManager.getProducts();
 
-// Ruta para la vista de productos
+// Vista de productos /products
 router.get('/products', (req, res) => {
     res.render('index', { products, style: 'index.css' });
 });
 
-// Ruta para la vista de productos en tiempo real
+// Vista de productos en tiempo real /realTimeProducts
 router.get('/realtimeproducts', (req, res) => {
     res.render('realTimeProducts', { products, style: 'realTimeProducts.css' });
 });
