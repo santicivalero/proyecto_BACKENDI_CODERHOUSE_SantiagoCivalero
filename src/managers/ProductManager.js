@@ -93,7 +93,8 @@ class ProductManager {
     this.products.splice(productIndex, 1);
 
     try {
-      this.writeToFile();
+      let eliminar = true
+      this.writeToFile(eliminar);
 
       console.log("Se eliminó el producto correctamente");
       return idProduct;
@@ -143,13 +144,17 @@ class ProductManager {
     }
   }
 
-  async writeToFile() {
+  async writeToFile(eliminar) {
     try {
       await fs.promises.writeFile(
         this.path,
         JSON.stringify(this.products, null, "\t")
       );
-      console.log("Los productos se han escrito en el archivo correctamente.");
+      if (eliminar) {
+        console.log("Los productos se han eliminado del archivo correctamente.");
+      } else {
+        console.log("Los productos se han escrito en el archivo correctamente.");
+      }
     } catch (error) {
       console.log("Error al escribir en el archivo:", error);
     }

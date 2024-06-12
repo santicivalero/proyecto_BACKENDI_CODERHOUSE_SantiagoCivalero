@@ -1,0 +1,21 @@
+{{!-- <h1>Products</h1>
+<ul>
+    {{#each products}}
+    <li>{{this.title}} - {{this.description}}</li>
+    {{/each}}
+</ul> --}}
+<h1>Products</h1>
+<div class="product-list" id="productList">
+            {{#each products}}
+                <div class="product-card">
+                    <h3>{{this.title}}</h3>
+                    <p><strong>Description:</strong> {{this.description}}</p>
+                    <p><strong>Code:</strong> {{this.code}}</p>
+                    <p><strong>Price:</strong> {{this.price}}</p>
+                    <p><strong>Stock:</strong> {{this.stock}}</p>
+                    <p><strong>Category:</strong> {{this.category}}</p>
+                    <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
+                </div>
+            {{/each}}
+        </div>
+

@@ -39,19 +39,6 @@
 		"id": 3
 	},
 	{
-		"title": "Product 100",
-		"description": "descripción 100",
-		"code": "00100",
-		"price": 100,
-		"status": true,
-		"stock": 100,
-		"category": "Category 100",
-		"thumbnails": [
-			"image 100"
-		],
-		"id": 4
-	},
-	{
 		"id": 5,
 		"title": "Product 700",
 		"description": "descripción actualizadisima",
@@ -63,5 +50,38 @@
 		"thumbnails": [
 			"image 700"
 		]
+	},
+	{
+		"id": 6,
+		"title": "Product 0303456",
+		"description": "descripcion 0303456",
+		"code": "0303456",
+		"price": "356",
+		"status": true,
+		"stock": "12",
+		"category": "categoria 456",
+		"thumbnails": []
+	},
+	{
+		"id": 9,
+		"title": "producto nuevisimo",
+		"description": "el producto mas nuevo",
+		"code": "111111",
+		"price": "222",
+		"status": true,
+		"stock": "22",
+		"category": "novedades",
+		"thumbnails": []
+	},
+	{
+		"id": 10,
+		"title": "producto ultra nuevisimo",
+		"description": "el mas nuevo que pueda existir",
+		"code": "12345",
+		"price": "12",
+		"status": true,
+		"stock": "12",
+		"category": "novedades",
+		"thumbnails": []
 	}
 ]
