@@ -1,16 +1,33 @@
+<!-- index.hbs -->
+
 <h1>Products</h1>
+
 {{!-- Lista de productos en formato card --}}
 <div class="product-list" id="productList">
-            {{#each products}}
-                <div class="product-card">
-                    <h3>{{this.title}}</h3>
-                    <p><strong>Description:</strong> {{this.description}}</p>
-                    <p><strong>Code:</strong> {{this.code}}</p>
-                    <p><strong>Price:</strong> {{this.price}}</p>
-                    <p><strong>Stock:</strong> {{this.stock}}</p>
-                    <p><strong>Category:</strong> {{this.category}}</p>
-                    <button onclick="deleteProduct('{{this.id}}')">Eliminar</button>
-                </div>
-            {{/each}}
+    {{#each products}}
+        <div class="product-card">
+            <h3>{{this.title}}</h3>
+            <p><strong>Description:</strong> {{this.description}}</p>
+            <p><strong>Code:</strong> {{this.code}}</p>
+            <p><strong>Price:</strong> ${{this.price}}</p>
+            <p><strong>Stock:</strong> {{this.stock}}</p>
+            <p><strong>Category:</strong> {{this.category}}</p>
+            <a href="/products/{{this._id}}">View Details</a>
+            <form action="/api/carts/add-product" method="POST">
+                <input type="hidden" name="productId" value="{{this.id}}">
+                <button type="submit">Add to Cart</button>
+            </form>
         </div>
+    {{/each}}
+</div>
+
+{{!-- Agregar paginación aquí --}}
+{{#if hasPrevPage}}
+    <a href="?{{#if limit}}limit={{limit}}&{{/if}}{{#if sort}}sort={{sort}}&{{/if}}{{#if query}}query={{query}}&{{/if}}{{#if page}}page={{prevPage}}{{/if}}">Previous</a>
+{{/if}}
+{{#if hasNextPage}}
+    <a href="?{{#if limit}}limit={{limit}}&{{/if}}{{#if sort}}sort={{sort}}&{{/if}}{{#if query}}query={{query}}&{{/if}}{{#if page}}page={{nextPage}}{{/if}}">Next</a>
+{{/if}}
+
+
 

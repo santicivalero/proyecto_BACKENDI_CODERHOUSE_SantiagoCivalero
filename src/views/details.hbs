@@ -1,0 +1,12 @@
+<!-- details.hbs -->
+
+<h1>{{product.title}}</h1>
+<p><strong>Description:</strong> {{product.description}}</p>
+<p><strong>Code:</strong> {{product.code}}</p>
+<p><strong>Price:</strong> ${{product.price}}</p>
+<p><strong>Stock:</strong> {{product.stock}}</p>
+<p><strong>Category:</strong> {{product.category}}</p>
+<form action="/api/carts/add-product" method="POST">
+    <input type="hidden" name="productId" value="{{product._id}}">
+    <button type="submit">Add to Cart</button>
+</form>

@@ -4,6 +4,7 @@ const socket = io();
 function updateProductList(products) {
     const productList = document.getElementById('productList');
     productList.innerHTML = '';
+    console.log(products);
     products.forEach(product => {
         const card = document.createElement('div');
         card.classList.add('product-card');
@@ -14,7 +15,7 @@ function updateProductList(products) {
             <p><strong>Price:</strong> ${product.price}</p>
             <p><strong>Stock:</strong> ${product.stock}</p>
             <p><strong>Category:</strong> ${product.category}</p>
-            <button onclick="deleteProduct(${product.id})">Eliminar</button>
+            <button onclick="deleteProduct('${product._id}')">Eliminar</button>
         `;
         productList.appendChild(card);
     });
@@ -46,5 +47,6 @@ function createProduct() {
 
 // Eliminar un producto
 function deleteProduct(productId) {
+    console.log(productId);
     socket.emit('deleteProduct', productId);
 }

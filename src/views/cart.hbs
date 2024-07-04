@@ -1,0 +1,16 @@
+<h1>Shopping Cart</h1>
+{{#if products.length}}
+    <ul>
+        {{#each products}}
+            <li>
+                <h3>{{this.product.title}}</h3>
+                <p>Quantity: {{this.quantity}}</p>
+                <form action="/api/carts/{{../cartId}}/products/{{this.product.id}}" method="POST">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>Your cart is empty.</p>
+{{/if}}
