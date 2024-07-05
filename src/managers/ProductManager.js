@@ -47,8 +47,8 @@ class ProductManager {
         page: products.page,
         hasPrevPage: products.hasPrevPage,
         hasNextPage: products.hasNextPage,
-        prevLink: products.hasPrevPage ? `/api/products?page=${products.prevPage}` : null,
-        nextLink: products.hasNextPage ? `/api/products?page=${products.nextPage}` : null
+        prevLink: products.hasPrevPage ? `/products?page=${products.prevPage}` : null,
+        nextLink: products.hasNextPage ? `/products?page=${products.nextPage}` : null
       };
     } catch (error) {
       console.log("Error al obtener los productos", error);

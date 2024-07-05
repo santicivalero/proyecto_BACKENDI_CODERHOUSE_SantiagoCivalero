@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Obtener todos los productos de un carrito /carts/:cid
+// Obtener todos los productos de un carrito /api/carts/:cid
 router.get("/:cid", async (req, res) => {
   const cid = req.params.cid;
   try {
@@ -50,7 +50,7 @@ router.post("/:cid/product/:pid", async (req, res) => {
 });
 
 // Eliminar producto de un carrito /api/carts/:cid/products/:pid
-router.delete("/api/:cid/products/:pid", async (req, res) => {
+router.delete("/:cid/products/:pid", async (req, res) => {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
@@ -67,7 +67,7 @@ router.delete("/api/:cid/products/:pid", async (req, res) => {
 });
 
 // Actualizar todos los productos de un carrito /api/carts/:cid
-router.put("/api/:cid", async (req, res) => {
+router.put("/:cid", async (req, res) => {
   try {
     const cid = req.params.cid;
     const products = req.body.products;
@@ -84,7 +84,7 @@ router.put("/api/:cid", async (req, res) => {
 });
 
 // Actualizar cantidad de un producto en el carrito /api/carts/:cid/products/:pid
-router.put("/api/:cid/products/:pid", async (req, res) => {
+router.put("/:cid/products/:pid", async (req, res) => {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
@@ -102,7 +102,7 @@ router.put("/api/:cid/products/:pid", async (req, res) => {
 });
 
 // Eliminar todos los productos de un carrito /api/carts/:cid
-router.delete("/api/:cid", async (req, res) => {
+router.delete("/:cid", async (req, res) => {
   try {
     const cid = req.params.cid;
     const updatedCart = await cartManager.clearCart(cid);
@@ -118,60 +118,3 @@ router.delete("/api/:cid", async (req, res) => {
 });
 
 export default router;
-
-
-
-
-
-// import { Router } from "express";
-// import { cartManager } from "../managers/CartManager.js";
-// import CustomError from "../classes/CustomError.js";
-
-// const router = Router();
-
-// // Crear carrito /api/carts
-// router.post("/", async (req, res) => {
-//   try {
-//     const newCart = await cartManager.createCart();
-//     res.status(201).json({ message: "Se creó el carrito correctamente", cart: newCart });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ error: "Error al crear el carrito" });
-//   }
-// });
-
-// // Obtener todos los productos de un carrito /api/carts/:cid
-// router.get("/:cid", async (req, res) => {
-//   const cid = req.params.cid;
-//   try {
-//     const products = await cartManager.getProductsFromCart(cid);
-//     res.json(products);
-//   } catch (error) {
-//     if (error instanceof CustomError) {
-//       res.status(error.statusCode).json({ error: error.message });
-//     } else {
-//       console.log(error);
-//       res.status(500).json({ error: "Error al obtener los productos del carrito" });
-//     }
-//   }
-// });
-
-// // Agregar producto a un carrito /api/carts/:cid/product/:pid
-// router.post("/:cid/product/:pid", async (req, res) => {
-//   try {
-//     const cid = req.params.cid;
-//     const pid = req.params.pid;
-//     const quantity = req.query.quantity;
-//     const productId =await cartManager.addProductToCart(cid, pid, quantity);
-//     res.status(201).json({ message: "Se agregó el producto al carrito correctamente", productId: productId });
-//   } catch (error) {
-//     if (error instanceof CustomError) {
-//       res.status(error.statusCode).json({ error: error.message });
-//     } else {
-//       console.log(error);
-//       res.status(500).json({ error: "Error al agregar el producto al carrito" });
-//     }
-//   }
-// });
-
-// export default router;

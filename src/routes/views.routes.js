@@ -1,14 +1,9 @@
 import { Router } from "express";
 import { productManager } from "../managers/ProductManager.js";
+import { cartManager } from "../managers/CartManager.js";
 
 const router = Router();
 
-// let products = productManager.getProducts();
-// console.log(products)
-// // Vista de productos /products
-// router.get('/products', (req, res) => {
-//     res.render('index', { products, style: 'index.css' });
-// });
 router.get('/products', async (req, res) => {
     try {
         let { limit, page, sort, query } = req.query;
@@ -22,7 +17,6 @@ router.get('/products', async (req, res) => {
         // Verificar si hay datos de paginación
         const { payload, hasPrevPage, prevPage, nextPage } = result;
 
-        // Renderizar la vista con los datos correctos
         res.render('index', { products: payload, hasPrevPage, prevPage, nextPage, limit, sort, query, style: 'index.css' });
     } catch (error) {
         console.log("Error al obtener los productos", error);
@@ -41,6 +35,20 @@ router.get('/products/:pid', async (req, res) => {
         res.status(500).send('Error al obtener el producto');
     }
 });
+
+
+router.get('/carts/:cid', async (req, res) => {
+    try {
+        const cart = await cartManager.getProductsFromCart(req.params.cid);
+        if (!cart) {
+            return res.status(404).send('Carrito no encontrado');
+        }
+        res.render('cart', { cart, style: 'cart.css' });
+    } catch (error) {
+        res.status(500).send('Error al obtener el carrito');
+    }
+})
+
 
 
 // Vista de productos en tiempo real /realTimeProducts

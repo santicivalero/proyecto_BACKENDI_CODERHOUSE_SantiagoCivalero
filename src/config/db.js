@@ -11,7 +11,7 @@ const connectDB = async () => {
     });
   } catch (error) {
     console.error('Error connecting to MongoDB', error);
-    process.exit(1); // Detiene la aplicación si no puede conectarse a la base de datos
+    process.exit(1);
   }
 };
 

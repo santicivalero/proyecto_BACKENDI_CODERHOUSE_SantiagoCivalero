@@ -81,7 +81,7 @@ class CartManager {
       console.log("El id debe ser un ObjectId válido");
       throw new CustomError("El id debe ser un ObjectId válido", 400);
     }
-
+    
     try {
       const cart = await Cart.findById(cid);
       if (!cart) {
@@ -160,6 +160,7 @@ class CartManager {
     try {
       const cart = await Cart.findById(cid);
       if (!cart) {
+        console.log("No se encontró el carrito");
         throw new CustomError("No se encontró el carrito", 404);
       }
 
