@@ -108,9 +108,7 @@ class ProductManager {
 export const productManager = new ProductManager();
 
 
-
-
-
+// Codigo con fs
 
 // import fs from "fs";
 // import __dirname from "../dirname.js";

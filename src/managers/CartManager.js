@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { cartModel as Cart } from '../models/cart.model.js'; // asegúrate de tener la ruta correcta
-import { productModel as Product } from '../models/product.model.js'; // asegúrate de tener la ruta correcta
+import { cartModel as Cart } from '../models/cart.model.js';
+import { productModel as Product } from '../models/product.model.js';
 import CustomError from '../classes/CustomError.js';
 
 class CartManager {
@@ -178,7 +178,7 @@ class CartManager {
 export const cartManager = new CartManager();
 
 
-
+// Codigo con fs
 
 // import fs from "fs";
 // import __dirname from "../dirname.js";
