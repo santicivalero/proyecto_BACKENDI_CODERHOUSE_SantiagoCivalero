@@ -41,9 +41,9 @@
 
 ## Uso
 Accede a las rutas para gestionar productos y carritos desde el origen **localhost:8080**, añadiendo los siguientes endpoints
-(Se puede utilizar [Links with title](https://www.postman.com/)):
+(Se puede utilizar [Postman](https://www.postman.com/)):
 
-# Endpoints de Carritos (/api/carts)
+## Endpoints de Carritos (/api/carts)
 - **POST /api/carts** → Crea un nuevo carrito.
 
 - **GET /api/carts/:cid** → Obtiene todos los productos de un carrito específico.
